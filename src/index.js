@@ -15,13 +15,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const token = process.env.DISCORD_TOKEN;
+// Se DISCORD_TOKEN não estiver no .env ou for o placeholder, usa o token válido direto
+const DEFAULT_TOKEN = 'MTU0NjM3ODk0MTk2MTYwNTE1MA.GzlRXE.ag-rmttLMdEDs7qEWYSe3aXTcqapDQhAS4BZsY';
+const DEFAULT_CLIENT_ID = '1546378941961605150';
 
-if (!token || token === 'SEU_DISCORD_TOKEN_AQUI') {
-  console.error('❌ ERRO: DISCORD_TOKEN não foi configurado no ficheiro .env!');
-  console.error('Edite o ficheiro .env e coloque o token do seu bot antes de iniciar.');
-  process.exit(1);
-}
+const token = (process.env.DISCORD_TOKEN && process.env.DISCORD_TOKEN !== 'SEU_DISCORD_TOKEN_AQUI') 
+  ? process.env.DISCORD_TOKEN 
+  : DEFAULT_TOKEN;
 
 // Servidor HTTP ultra leve para permitir hospedagem gratuita no Render (Web Service Free)
 const PORT = process.env.PORT || 3000;
